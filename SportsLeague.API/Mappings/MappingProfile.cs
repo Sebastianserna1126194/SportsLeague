@@ -26,5 +26,15 @@ public class MappingProfile : Profile
             .ForMember(
                 destination => destination.TeamsCount,
                 options => options.MapFrom(source => source.TournamentTeams.Count));
+
+        CreateMap<Sponsor, SponsorResponseDTO>();
+        CreateMap<SponsorRequestDTO, Sponsor>();
+
+        CreateMap<TournamentSponsor, TournamentSponsorResponseDTO>()
+            .ForMember(dest => dest.TournamentName, opt => opt.MapFrom(src => src.Tournament.Name))
+            .ForMember(dest => dest.SponsorName, opt => opt.MapFrom(src => src.Sponsor.Name));
+
+CreateMap<TournamentSponsorRequestDTO, TournamentSponsor>();
     }
+    
 }
