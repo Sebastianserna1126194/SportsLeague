@@ -1,3 +1,9 @@
-# SportsLeague API
+SportsLeague
 
-Versión reescrita y ordenada del proyecto base.
+API REST desarrollada en .NET para gestionar equipos y jugadores dentro de una liga deportiva
+
+Las tegnologías usadas son: 
+- .NET
+- Entity Framework
+- SQL Server
+- Swagger
