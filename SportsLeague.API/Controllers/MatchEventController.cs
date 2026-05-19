@@ -1,33 +1,60 @@
-using Microsoft.AspNetCore.Mvc;
-namespace SportsLeague.API.Controllers
+using SportsLeague.API.DTOs.Request;
+using SportsLeague.API.DTOs.Response;
+using SportsLeague.Domain.Entities;
+
+namespace SportsLeague.API.Services
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class MatchEventController : ControllerBase
+    public class MatchEventServices
     {
-        private readonly MatchEventService _service;
-
-        public MatchEventController(MatchEventService service)
+        public MatchResultResponseDTO RegisterMatchResult(MatchResultRequestDTO dto)
         {
-            _service = service;
+            var result = new MatchResult
+            {
+                GoalsLocal = dto.GoalsLocal,
+                GoalsVisitor = dto.GoalsVisitor,
+                Observations = dto.Observations
+            };
+
+            return new MatchResultResponseDTO
+            {
+                GoalsLocal = result.GoalsLocal,
+                GoalsVisitor = result.GoalsVisitor,
+                Observations = result.Observations
+            };
         }
 
-        [HttpPost("result")]
-        public IActionResult AddResult(MatchResultRequestDTO dto)
+        public GoalResponseDTO RegisterGoal(GoalRequestDTO dto)
         {
-            return Ok(dto);
+            var goal = new Goal
+            {
+                PlayerId = dto.PlayerId,
+                Minute = dto.Minute,
+                Type = dto.Type
+            };
+
+            return new GoalResponseDTO
+            {
+                PlayerId = goal.PlayerId,
+                Minute = goal.Minute,
+                Type = goal.Type
+            };
         }
 
-        [HttpPost("goal")]
-        public IActionResult AddGoal(GoalRequestDTO dto)
+        public CardResponseDTO RegisterCard(CardRequestDTO dto)
         {
-            return Ok(dto);
-        }
+            var card = new Card
+            {
+                PlayerId = dto.PlayerId,
+                Minute = dto.Minute,
+                Type = dto.Type
+            };
 
-        [HttpPost("card")]
-        public IActionResult AddCard(CardRequestDTO dto)
-        {
-            return Ok(dto);
+            return new CardResponseDTO
+            {
+                PlayerId = card.PlayerId,
+                Minute = card.Minute,
+                Type = card.Type
+            };
         }
     }
 }
